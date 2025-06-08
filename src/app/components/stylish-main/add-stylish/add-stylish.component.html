@@ -1,0 +1,55 @@
+<div class="container py-3">
+  <!-- Form Card -->
+  <div class="bg-white p-4 p-md-5 shadow rounded-4 mt-5">
+    <h1 class="text-center mb-1 fw-bold display-6 text-uppercase text-primary">
+      Add New Stylish
+    </h1>
+
+    <form [formGroup]="stylistForm" (ngSubmit)="onSubmit()">
+      <div class="row g-4">
+        <!-- Stylist Name -->
+        <div class="col-md-6">
+          <label for="stylistName" class="form-label fw-semibold">Stylist Name</label>
+          <input type="text" class="form-control" id="stylistName" formControlName="stylistName" placeholder="Enter Name" required>
+        </div>
+
+        <!-- Email -->
+        <div class="col-md-6">
+          <label for="email" class="form-label fw-semibold">Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter Email" required>
+        </div>
+
+        <!-- Contact -->
+        <div class="col-md-6">
+          <label for="contact" class="form-label fw-semibold">Phone No</label>
+          <input type="tel" class="form-control" id="contact" formControlName="contact" placeholder="Enter Mobile Number" required>
+        </div>
+
+        <!-- Location -->
+        <div class="col-md-6">
+          <label for="location" class="form-label fw-semibold">Location</label>
+          <input type="text" class="form-control" id="location" formControlName="location" placeholder="Enter Location" required>
+        </div>
+
+        <!-- Reference -->
+        <div class="col-md-6">
+          <label for="reference" class="form-label fw-semibold">Reference</label>
+          <input type="text" class="form-control" id="reference" formControlName="reference" placeholder="Referred By">
+        </div>
+
+        <!-- Expert In -->
+        <div class="col-md-6">
+          <label for="expertIn" class="form-label fw-semibold">Expert In</label>
+          <input type="text" class="form-control" id="expertIn" formControlName="expert_in" placeholder="e.g. Haircut, Facial" required>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary px-4 py-2 fw-bold rounded-pill">
+          <i class="bi bi-plus-circle me-2"></i> ADD STYLISH
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container my-4" id="invoice">
+  
+
+  <div class="text-center mb-3">
+    <img src="assets/logo.png" alt="Hair Salon Logo" width="120" />
+    <h2 class="mt-2 fw-bold">Bill</h2>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered border-dark">
+      <thead class="text-center table-light">
+        <tr>
+          <th>Sr.no</th>
+          <th>Customer Name</th>
+          <th>Services</th>
+          <th>Amount</th>
+          <th>Total Amount</th>
+        </tr>
+      </thead>
+      <tbody class="text-center align-middle">
+        <tr>
+          <td>1</td>
+          <td class="fw-semibold">Soniya K</td>
+          <td>Hair Cut</td>
+          <td>230</td>
+          <td>230</td>
+        </tr>
+        <!-- Add more rows here if needed -->
+        <tr>
+          <td colspan="4" class="text-end fw-semibold">Only Rs.</td>
+          <td class="fw-semibold">230</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="text-center mt-4 no-print">
+    <button class="btn btn-danger px-4 py-2 fw-bold rounded-pill" (click)="printPage()">
+      Print
+    </button>
+  </div>
+</div>

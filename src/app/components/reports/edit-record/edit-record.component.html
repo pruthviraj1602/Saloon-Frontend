@@ -1,0 +1,68 @@
+<div class="container py-3">
+  <div class="bg-white p-4 p-md-5 shadow rounded-4">
+    <h1 class="text-center mb-1 fw-bold display-6 text-uppercase text-primary">
+      Edit Appointment
+    </h1>
+
+    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+      <div class="row g-4">
+        <input type="hidden" formControlName="id">
+        <div class="col-md-6">
+          <label for="customerName" class="form-label fw-semibold">Customer Name</label>
+          <input type="text" class="form-control" id="customerName" formControlName="customerName" placeholder="Name" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="service" class="form-label fw-semibold">Service</label>
+          <input type="text" class="form-control" id="service" formControlName="service" placeholder="Service Name" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="phone" class="form-label fw-semibold">Phone No</label>
+          <input type="tel" class="form-control" id="phone" formControlName="customerContact" placeholder="Mobile Number" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="timeSlot" class="form-label fw-semibold">Time Slot</label>
+          <input type="time" class="form-control" id="timeSlot" formControlName="time" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="calendar" class="form-label fw-semibold">Date</label>
+          <input type="date" class="form-control" id="calendar" formControlName="date" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="payment" class="form-label fw-semibold">Payment</label>
+          <input type="number" class="form-control" id="payment" formControlName="payment" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="paymentMethod" class="form-label fw-semibold">Payment Done By</label>
+          <select class="form-select" id="paymentMethod" formControlName="paymentType">
+            <option value="">Select Payment Method</option>
+            <option value="CASH">Cash</option>
+            <option value="UPI">UPI</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="stylistId" class="form-label">Stylist</label>
+          <select id="stylistId" class="form-select" formControlName="stylistId">
+            <option value="">Select Stylist</option>
+            <option *ngFor="let stylist of stylists" [value]="stylist.stylistId">
+              {{ stylist.stylistName }}
+            </option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-danger px-4 py-2 fw-bold rounded-pill">
+          UPDATE
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

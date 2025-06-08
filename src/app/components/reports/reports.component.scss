@@ -1,0 +1,49 @@
+.badge {
+  padding: 0.35em 0.75em;
+  border-radius: 1em;
+  font-size: 0.875rem;
+}
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #print-section, #print-section * {
+    visibility: visible;
+  }
+
+  #print-section {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  mat-icon, button {
+    display: none !important;
+  }
+}
+
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #print-section, #print-section * {
+    visibility: visible;
+  }
+
+  #print-section {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}

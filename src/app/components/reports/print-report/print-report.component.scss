@@ -1,0 +1,29 @@
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    margin: 0;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  #invoice {
+    width: 100%;
+    page-break-after: always;
+  }
+
+  table {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  vertical-align: middle;
+  font-size: 14px;
+}

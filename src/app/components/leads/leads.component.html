@@ -1,0 +1,87 @@
+<div class="container mt-2">
+    <div class="d-flex justify-content-between align-items-center  bg-light rounded">
+        <!-- Left group -->
+        <div class="btn-group">
+            <!-- Filter Toggle Button -->
+            <button class="btn btn-outline-secondary mr-2" (click)="toggleFilterPanel()">
+                <i class="fas fa-filter"></i>
+            </button>
+
+            <!-- Filter Sidebar Panel -->
+
+            <!-- leads-dropdown.component.html -->
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="allLeadsDropdown"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ selectedLeadView }}
+                </button>
+                <div class="dropdown-menu custom-view" aria-labelledby="allLeadsDropdown">
+                    <div class="dropdown-search">
+                        <input type="text" class="form-control" placeholder="Search"
+                            (input)="filterDropdown()" />
+                    </div>
+                    <div class="dropdown-list">
+                        <a *ngFor="let view of filteredLeadViews" class="dropdown-item"
+                            [class.active]="view === selectedLeadView" href="#" (click)="selectView(view)">
+                            {{ view }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right group -->
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle mx-2" data-toggle="dropdown">
+                Create Lead
+            </button>
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                Actions
+            </button>
+        </div>
+    </div>
+    <div *ngIf="filterPanelVisible" class="bg-light p-3 shadow-sm" style="width: 300px; border-radius: 8px;">
+        <div class="mb-2 font-weight-bold">
+            Total Records <span class="text-primary">10</span>
+        </div>
+
+        <div class="mb-3 font-weight-bold">Filter Leads by</div>
+
+        <input type="text" class="form-control mb-3" placeholder="Search filters..."  />
+
+        <!-- System Defined Filters -->
+        <div>
+            <div class="font-weight-bold mb-2" style="cursor: pointer;" (click)="toggleSection('system')">
+                <i 
+                    class="mr-1"></i>
+                System Defined Filters
+            </div>
+            <div *ngIf="showSystemFilters" class="ml-3">
+                <div *ngFor="let item of systemFilters">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" [id]="item" >
+                        <label class="form-check-label" [for]="item">{{ item }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter By Fields -->
+        <div class="mt-3">
+            <div class="font-weight-bold mb-2" style="cursor: pointer;" (click)="toggleSection('fields')">
+                <i 
+                    class="mr-1"></i>
+                Filter By Fields
+            </div>
+            <div *ngIf="showFieldFilters" class="ml-3">
+                <div *ngFor="let item of fieldFilters">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" [id]="item" >
+                        <label class="form-check-label" [for]="item">{{ item }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
