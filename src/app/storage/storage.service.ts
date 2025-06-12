@@ -16,6 +16,11 @@ export class StorageService {
     return localStorage.getItem('user');
    }
 
+  public getUserId(): number | null {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user?.id || null;
+  }
+
    public logout()
    {
     localStorage.removeItem('user');

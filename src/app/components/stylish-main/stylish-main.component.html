@@ -1,75 +1,95 @@
-<div class="d-flex justify-content-start mb-3">
+<div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
 
-  <button type="button" class="btn btn-primary d-flex align-items-center" routerLink="/dashboard/stylish/add-stylish">
-    <i class="bi bi-plus me-2"></i>
-    Add Stylish
+  <!-- Add Stylist Button -->
+  <button type="button"
+          class="btn btn-gradient d-flex align-items-center shadow px-3 mb-sm-3"
+          routerLink="/dashboard/stylish/add-stylish"
+          style="height: 40px;">
+    <i class="bi bi-plus-circle me-2 fs-5"></i>
+    Add Stylist
   </button>
+
+  <!-- Search Field -->
+  <div class="d-flex align-items-center" style="height: 40px;">
+    <mat-form-field appearance="outline" class="m-0 " style="height: 40px;">
+      <mat-label>Search Stylist</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="e.g. Name or Location" #input />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
 </div>
 
-<mat-form-field>
-  <mat-label>Search</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Stylish Name" #input>
-</mat-form-field>
 
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort>
 
-    <!-- ID Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-      <td mat-cell *matCellDef="let row"> {{ row.id }} </td>
-    </ng-container>
+<div class="card shadow table-card">
+  <div class="table-responsive">
+    <table mat-table [dataSource]="dataSource" matSort class="table table-borderless align-middle">
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="stylishName1">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let row"> {{ row.stylishName1 }} </td>
-    </ng-container>
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{ row.id }} </td>
+      </ng-container>
 
-    <!-- Email Column -->
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-      <td mat-cell *matCellDef="let row"> {{ row.email }} </td>
-    </ng-container>
+      <!-- Name -->
+      <ng-container matColumnDef="stylishName1">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let row"> {{ row.stylishName1 }} </td>
+      </ng-container>
 
-    <!-- Phone No Column -->
-    <ng-container matColumnDef="phoneNo">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone No </th>
-      <td mat-cell *matCellDef="let row"> {{ row.phoneNo }} </td>
-    </ng-container>
+      <!-- Email -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let row"> {{ row.email }} </td>
+      </ng-container>
 
-    <!-- Reference Column -->
-    <ng-container matColumnDef="reference">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Reference </th>
-      <td mat-cell *matCellDef="let row"> {{ row.reference }} </td>
-    </ng-container>
+      <!-- Phone -->
+      <ng-container matColumnDef="phoneNo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone No </th>
+        <td mat-cell *matCellDef="let row"> {{ row.phoneNo }} </td>
+      </ng-container>
 
-    <!-- Location Column -->
-    <ng-container matColumnDef="location">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
-      <td mat-cell *matCellDef="let row"> {{ row.location }} </td>
-    </ng-container>
+      <!-- Reference -->
+      <ng-container matColumnDef="reference">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Reference </th>
+        <td mat-cell *matCellDef="let row"> {{ row.reference }} </td>
+      </ng-container>
 
-    <!-- Actions Column -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
-      <td mat-cell *matCellDef="let row">
-        <button class="btn btn-sm btn-primary me-2" (click)="editStylist(row)">
-          <i class="bi bi-pencil"></i>
-        </button>
-        <button class="btn btn-sm btn-danger" (click)="deleteStylist(row.id)">
-          <i class="bi bi-trash"></i>
-        </button>
-      </td>
-    </ng-container>
+      <!-- Location -->
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
+        <td mat-cell *matCellDef="let row"> {{ row.location }} </td>
+      </ng-container>
 
-    <!-- Table Rows -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="8">No data matching the filter "{{ input.value }}"</td>
-    </tr>
-  </table>
+      <ng-container matColumnDef="expert">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Expert </th>
+        <td mat-cell *matCellDef="let row"> {{ row.expert_in }} </td>
+      </ng-container>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of stylists"></mat-paginator>
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let row">
+          <button class="btn btn-outline-primary btn-sm me-2" (click)="editStylist(row)">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="btn btn-outline-danger btn-sm" (click)="deleteStylist(row.id)">
+            <i class="bi bi-trash3"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Table Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell text-center text-muted" colspan="8">
+          <em>No data matching “{{ input.value }}”</em>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of stylists"></mat-paginator>
 </div>

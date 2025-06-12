@@ -1,0 +1,84 @@
+.dashboard-wrapper {
+    background-color: #f9fafa;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  .stat-card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease;
+  
+    &:hover {
+      transform: translateY(-4px);
+    }
+  
+    .icon-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+  
+    .stat-label {
+      font-size: 0.95rem;
+      color: #666;
+      margin: 0;
+    }
+  
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0;
+      color: #222;
+    }
+  }
+  
+  // Icon background colors
+  .bg-blue {
+    background-color: #0d6efd;
+  }
+  
+  .bg-green {
+    background-color: #198754;
+  }
+  
+  .bg-orange {
+    background-color: #fd7e14;
+  }
+  
+  .chart-box {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+  
+    canvas {
+      width: 100% !important;
+      max-height: 300px;
+    }
+  }
+  

@@ -1,160 +1,100 @@
-<div class="container py-3">
-    <div class="bg-white p-4 p-md-5 shadow rounded-4">
-      <h1 class="text-center mb-1 fw-bold display-6 text-uppercase text-primary">
-        Book Appointment
-      </h1>
+<div class="container py-4">
+  <div class="card form-box border-0 shadow rounded-4 p-5">
+    <h1 class="text-center fw-bold mb-4 gradient-title">Book Appointment</h1>
 
-      <form (ngSubmit)="submitAppointment()" [formGroup]="appointment" novalidate>
-        <!-- Success & Error Messages -->
-        <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
-        <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <form (ngSubmit)="submitAppointment()" [formGroup]="appointment" novalidate>
+      <!-- Success & Error Messages -->
 
-        <!-- Select Stylist -->
-        <div class="mb-4">
-          <label for="selectedStylist" class="form-label fw-semibold">Select Stylist</label>
-          <select
-            class="form-select"
-            id="selectedStylist"
-            name="selectedStylist"
-            formControlName="stylistId"
-            required
-          >
-            <option value="" disabled selected hidden>Select Stylist</option>
+
+      <!-- Select Stylist -->
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Select Stylist</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light"><i class="bi bi-person-badge-fill"></i></span>
+          <select class="form-select form-control-alt" formControlName="stylistId" required>
+            <option value="" disabled hidden>Select Stylist</option>
             <option *ngFor="let s of stylist" [value]="s.stylistId">
               {{ s.stylistName }}
             </option>
           </select>
         </div>
+      </div>
 
-
-
-        <!-- Other Fields -->
-        <div class="row g-4">
-          <div class="col-md-6">
-            <label for="customerName" class="form-label fw-semibold">Customer Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="customerName"
-              name="customerName"
-              formControlName="customerName"
-              placeholder="Name"
-
-              required
-            />
-
-          </div>
-
-          <div class="col-md-6">
-            <label for="serviceName" class="form-label fw-semibold">Service</label>
-            <input
-              type="text"
-              class="form-control"
-              id="serviceName"
-              name="serviceName"
-             formControlName="serviceName"
-              placeholder="Service Name"
-              required
-            />
-
-          </div>
-
-          <div class="col-md-6">
-            <label for="customerContact" class="form-label fw-semibold">Customer Contact</label>
-            <input
-              type="text"
-              class="form-control"
-              id="customerContact"
-              name="customerContact"
-              formControlName="customerContact"
-              placeholder="Mobile Number"
-
-              required
-            />
-
-          </div>
-
-          <div class="col-md-6">
-            <label for="time" class="form-label fw-semibold">Time Slot</label>
-            <input
-              type="time"
-              class="form-control"
-              id="time"
-              name="time"
-              formControlName="time"
-
-              required
-            />
-<!--            <div *ngIf="timeInput.invalid && timeInput.touched" class="text-danger">-->
-<!--              Time Slot is required.-->
-<!--            </div>-->
-          </div>
-
-          <div class="col-12">
-            <label for="date" class="form-label fw-semibold">Date</label>
-            <input
-              type="date"
-              class="form-control"
-              id="date"
-              name="date"
-              formControlName="date"
-
-              required
-            />
-
+      <!-- Customer Info -->
+      <div class="row gy-4">
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Customer Name</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-person-fill"></i></span>
+            <input type="text" class="form-control form-control-alt" formControlName="customerName" placeholder="Name">
           </div>
         </div>
-        <!-- Payment Fields -->
-        <div class="row g-4 mt-2">
-          <div class="col-md-6">
-            <label for="payment" class="form-label fw-semibold">Payment Amount</label>
-            <input
-              type="number"
-              class="form-control"
-              id="payment"
-              name="payment"
-              formControlName="payment"
-              placeholder="Enter amount"
-              required
-            />
-          </div>
 
-          <div class="col-md-6">
-            <label for="paymentType" class="form-label fw-semibold">Payment Type</label>
-            <select
-              class="form-select"
-              id="paymentType"
-              name="paymentType"
-              formControlName="paymentType"
-              required
-            >
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Service</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-scissors"></i></span>
+            <input type="text" class="form-control form-control-alt" formControlName="serviceName" placeholder="Service Name">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Customer Contact</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-telephone-fill"></i></span>
+            <input type="text" class="form-control form-control-alt" formControlName="customerContact" placeholder="Mobile Number">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Time Slot</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-clock-fill"></i></span>
+            <input type="time" class="form-control form-control-alt" formControlName="time">
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label fw-semibold">Date</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-calendar-event-fill"></i></span>
+            <input type="date" class="form-control form-control-alt" formControlName="date">
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Fields -->
+      <div class="row gy-4 mt-2">
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Payment Amount</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-currency-rupee"></i></span>
+            <input type="number" class="form-control form-control-alt" formControlName="payment" placeholder="Enter amount">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Payment Type</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-credit-card-fill"></i></span>
+            <select class="form-select form-control-alt" formControlName="paymentType">
               <option value="" disabled selected hidden>Select Payment Type</option>
               <option value="UPI">UPI</option>
               <option value="CASH">CASH</option>
             </select>
           </div>
         </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="text-center mt-5 d-flex justify-content-center gap-3">
+        <button type="button" (click)="appointment.reset()" class="btn btn-secondary px-4 py-2 fw-bold rounded-pill">RESET</button>
+        <button type="submit" [disabled]="appointment.invalid" class="btn btn-primary px-4 py-2 fw-bold rounded-pill">
+        <i class="bi bi-check2-circle me-2"></i> SUBMIT
+        </button>
+      </div>
 
 
-        <!-- Buttons -->
-        <div class="text-center mt-4 d-flex justify-content-center gap-3">
-
-          <button
-            type="button"
-
-            class="btn btn-secondary px-4 py-2 fw-bold rounded-pill"
-            [disabled]="isSubmitting"
-          >
-            RESET
-          </button>
-          <button
-            type="submit"
-
-            class="btn btn-success px-4 py-2 fw-bold rounded-pill"
-          >
-            SUBMIT
-          </button>
-        </div>
-      </form>
-    </div>
+    </form>
   </div>
+</div>

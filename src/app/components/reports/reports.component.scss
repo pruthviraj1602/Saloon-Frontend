@@ -3,8 +3,9 @@
   border-radius: 1em;
   font-size: 0.875rem;
 }
-
-
+.btn-outline-primary,.btn-outline-warning,.btn-outline-danger{
+  border-color: #ffffff;
+}
 @media print {
   body * {
     visibility: hidden;
@@ -24,6 +25,7 @@
   mat-icon, button {
     display: none !important;
   }
+
 }
 
 

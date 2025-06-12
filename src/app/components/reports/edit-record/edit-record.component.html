@@ -63,6 +63,16 @@
           UPDATE
         </button>
       </div>
+
+      <div *ngIf="bookingForm.invalid" class="text-danger mt-3">
+        <div *ngFor="let field of formControls">
+          <div *ngIf="field[1].invalid">
+            {{ field[0] }} is invalid
+          </div>
+        </div>
+      </div>
+
+
     </form>
   </div>
 </div>

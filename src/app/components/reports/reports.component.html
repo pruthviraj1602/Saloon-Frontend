@@ -100,9 +100,9 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef class="no-print"> Actions </th>
           <td mat-cell *matCellDef="let row">
-            <button mat-icon-button color="primary" (click)="editRecord(row.id)"><mat-icon>edit</mat-icon></button>
-            <button mat-icon-button color="accent" (click)="printRecord(row.id)" ><mat-icon>print</mat-icon></button>
-            <button mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
+            <button mat-icon-button class="btn btn-outline-primary btn-sm me-2" (click)="editRecord(row.id)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button class="btn btn-outline-warning btn-sm me-2" (click)="printRecord(row.id)" ><mat-icon>print</mat-icon></button>
+            <button mat-icon-button class="btn btn-outline-danger btn-sm me-2" (click)="delete(row.id)"><mat-icon>delete</mat-icon></button>
           </td>
         </ng-container>
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminserviceService } from '../../../services/adminservice.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-stylish',
@@ -17,39 +18,46 @@ export class EditStylishComponent implements OnInit{
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private adminService: AdminserviceService
+    private adminService: AdminserviceService,
+    private snackBar:MatSnackBar
   ) {
     this.stylistForm = this.fb.group({
+      stylistId: [''],
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phoneNo: ['', Validators.required],
       location: ['', Validators.required],
       reference: [''],
-      
+      date: ['',Validators.required],
       expert_in: [''],
-      active: [true, Validators.required], 
+      active: [true, Validators.required]
     });
-    
+
+
   }
 
   ngOnInit(): void {
+
     this.route.queryParams.subscribe(params => {
       const encodedId = params['id'];
       if (encodedId) {
         try {
-          const decodedId = atob(encodedId); 
+          const decodedId = atob(encodedId);
           this.fetchStylistById(decodedId);
         } catch (e) {
           console.error('Invalid ID encoding');
-          this.router.navigate(['/dashboard/stylish']); 
+          this.router.navigate(['/dashboard/stylish']);
         }
       }
     });
   }
 
+
+
   fetchStylistById(id: string): void {
     this.adminService.getStylistById(id).subscribe({
       next: (data: any) => {
+        console.log(data)
         this.stylistData = {
           id: data.stylistId,
           name: data.stylistName,
@@ -58,13 +66,12 @@ export class EditStylishComponent implements OnInit{
           reference: data.reference,
           expert_in: data.expert_in,
           date: data.date,
-          bio: data.bio,
           location: data.location,
           active: data.active
         };
-        
+        console.log(data)
         this.stylistForm.patchValue(this.stylistData);
-        
+
       },
       error: (err) => {
         console.error('Failed to fetch stylist details:', err);
@@ -82,31 +89,28 @@ export class EditStylishComponent implements OnInit{
         location: this.stylistForm.value.location,
         reference: this.stylistForm.value.reference || '',
         expert_in: this.stylistForm.value.expert_in || '',
+        date: this.stylistForm.value.date,
         active: this.stylistForm.value.active
-        
-        // date: this.stylistData.date || '',
-        // bio: this.stylistData.bio || ''
       };
-      
-  
       console.log('Updating stylist with params:', updatedData);
-  
       this.adminService.updateStylistDetails(updatedData).subscribe({
         next: () => {
-          console.log('Stylist updated successfully');
+          this.snackBar.open("update successfully...!","Close",{duration:3000})
+          this.router.navigate(['/dashboard/stylish'])
         },
         error: (err) => {
           console.error('Update failed:', err);
+          this.snackBar.open("update Failed...!","Close",{duration:3000})
         }
       });
     }
   }
-  
-  
-  
-  
 
-  
-  
-  
+
+
+
+
+
+
+
 }

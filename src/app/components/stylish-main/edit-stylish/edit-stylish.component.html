@@ -1,58 +1,90 @@
-<div class="container py-3" *ngIf="stylistData">
-  <!-- Form Card -->
-  <div class="bg-white p-4 p-md-5 shadow rounded-4 mt-5">
-    <h1 class="text-center mb-4 fw-bold display-6 text-uppercase text-primary">
-      Edit Stylish
-    </h1>
+<div class="container py-1" *ngIf="stylistData">
+  <div class="card form-box border-0 shadow rounded-4 p-5 mt-4">
+    <h1 class="text-center fw-bold mb-4 text-primary">Edit Stylist</h1>
 
     <form [formGroup]="stylistForm" (ngSubmit)="onSubmit()">
-      <div class="row g-4">
+      <div class="row gy-4">
+
         <!-- Stylist Name -->
         <div class="col-md-6">
-          <label for="name" class="form-label fw-semibold">Stylist Name</label>
-          <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter Name" required>
+          <label class="form-label fw-semibold">Stylist Name</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-person-fill"></i></span>
+            <input type="text" class="form-control form-control-alt" id="name" formControlName="name" placeholder="Enter Name" required>
+          </div>
         </div>
 
         <!-- Email -->
         <div class="col-md-6">
-          <label for="email" class="form-label fw-semibold">Email</label>
-          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter Email" required>
+          <label class="form-label fw-semibold">Email</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-envelope-fill"></i></span>
+            <input type="email" class="form-control form-control-alt" id="email" formControlName="email" placeholder="Enter Email" required>
+          </div>
         </div>
 
         <!-- Phone -->
         <div class="col-md-6">
-          <label for="phoneNo" class="form-label fw-semibold">Phone No</label>
-          <input type="tel" class="form-control" id="phoneNo" formControlName="phoneNo" placeholder="Enter Mobile Number" required>
+          <label class="form-label fw-semibold">Phone No</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-telephone-fill"></i></span>
+            <input type="tel" class="form-control form-control-alt" id="phoneNo" formControlName="phoneNo" placeholder="Enter Mobile Number" required>
+          </div>
         </div>
 
         <!-- Location -->
         <div class="col-md-6">
-          <label for="location" class="form-label fw-semibold">Location</label>
-          <input type="text" class="form-control" id="location" formControlName="location" placeholder="Enter Location" required>
+          <label class="form-label fw-semibold">Location</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-geo-alt-fill"></i></span>
+            <input type="text" class="form-control form-control-alt" id="location" formControlName="location" placeholder="Enter Location" required>
+          </div>
         </div>
 
         <!-- Reference -->
         <div class="col-md-6">
-          <label for="reference" class="form-label fw-semibold">Reference</label>
-          <input type="text" class="form-control" id="reference" formControlName="reference" placeholder="Referred By">
+          <label class="form-label fw-semibold">Reference</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-person-badge-fill"></i></span>
+            <input type="text" class="form-control form-control-alt" id="reference" formControlName="reference" placeholder="Referred By">
+          </div>
         </div>
 
         <!-- Expert In -->
         <div class="col-md-6">
-          <label for="expert_in" class="form-label fw-semibold">Expert In</label>
-          <input type="text" class="form-control" id="expert_in" formControlName="expert_in" placeholder="e.g. Haircut, Makeup">
+          <label class="form-label fw-semibold">Expert In</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-stars"></i></span>
+            <input type="text" class="form-control form-control-alt" id="expert_in" formControlName="expert_in" placeholder="e.g. Haircut, Makeup">
+          </div>
         </div>
       </div>
-    
-      
 
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Joining Date</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light"><i class="bi bi-calendar-event-fill"></i></span>
+          <input type="date" class="form-control form-control-alt" id="date" formControlName="date">
+        </div>
+      </div>
 
+      <!-- Active Toggle -->
+      <div class="col-md-6">
+        <label class="form-label fw-semibold d-block">Active</label>
+        <label class="custom-switch">
+          <input type="checkbox"
+                 class="custom-switch-input"
+                 id="activeToggle"
+                 formControlName="active">
+          <span class="custom-switch-slider"></span>
+          <span class="ms-2">{{ stylistForm.get('active')?.value ? 'Active' : 'Inactive' }}</span>
+        </label>
+      </div>
       <!-- Buttons -->
-      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 gap-3">
-        <button type="submit" class="btn btn-primary px-4 py-2 fw-bold rounded-pill w-100 w-md-auto" [disabled]="!stylistForm.valid">
-          <i class="bi bi-pencil-square me-2"></i> Update Stylish
+      <div class="d-flex flex-column flex-md-row justify-content-center align-items-center mt-4 gap-3">
+        <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold rounded-pill shadow-sm w-md-auto" [disabled]="!stylistForm.valid">
+          <i class="bi bi-pencil-square me-2"></i> Update Stylist
         </button>
-
       </div>
     </form>
   </div>

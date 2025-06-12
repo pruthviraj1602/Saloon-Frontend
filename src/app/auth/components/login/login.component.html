@@ -1,4 +1,4 @@
-<div class="bg-body-secondary d-flex align-items-center justify-content-center" style="min-height: 100vh; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+<!-- <div class="bg-body-secondary d-flex align-items-center justify-content-center" style="min-height: 100vh; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6 col-lg-5">
@@ -37,4 +37,47 @@
       </div>
     </div>
   </div>
+</div> -->
+
+
+<div class="login-wrapper">
+  <div class="login-background">
+    <div class="grid-bg"></div>
+  </div>
+
+  <div class="login-content">
+    <h1 class="brand-name text-center">Saloon Management</h1>
+    <div class="form-container">
+      <form [formGroup]="login" (ngSubmit)="log()">
+        <span class="form-title">Sign in to your account</span>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="username" placeholder="Enter your email">
+        </div>
+
+        <div class="form-group">
+          <div class="form-label-row">
+            <label for="password">Password</label>
+<!--            <a href="#" class="forgot-link">Forgot your password?</a>-->
+          </div>
+          <input type="password" id="password" formControlName="password" placeholder="Enter your password">
+        </div>
+
+        <div class="form-check-row">
+          <input type="checkbox" id="remember">
+          <label for="remember">Stay signed in </label>
+        </div>
+
+        <button type="submit" class="btn-login">Continue</button>
+
+        <!-- <a href="#" class="ssolink">Use single sign-on (Google) instead</a> -->
+
+<!--        <p class="register-link text-center">-->
+<!--          Don't have an account? <a href="#">Sign up</a>-->
+<!--        </p>-->
+      </form>
+    </div>
+  </div>
 </div>
+

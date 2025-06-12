@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .login-wrapper {
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .login-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    overflow: hidden;
+  
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(white 0%, rgb(247, 250, 252) 33%);
+      transform: rotate(-12deg) skew(-12deg);
+      animation: move-bg 6s ease-in-out infinite;
+    }
+  }
+  
+  @keyframes move-bg {
+    0%, 100% {
+      transform: rotate(-12deg) skew(-12deg) translateX(0);
+    }
+    50% {
+      transform: rotate(-12deg) skew(-12deg) translateX(80px);
+    }
+  }
+  
+  .login-content {
+    z-index: 1;
+    width: 100%;
+    max-width: 450px;
+    padding: 48px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: rgba(60, 66, 87, 0.12) 0 7px 14px, rgba(0, 0, 0, 0.12) 0 3px 6px;
+  }
+  
+  .brand-name {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #5469d4;
+  }
+  
+  .form-title {
+    font-size: 20px;
+    margin-bottom: 24px;
+    display: block;
+    color: #1a1f36;
+  }
+  
+  .form-group {
+    margin-bottom: 24px;
+  
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+  
+    input {
+      width: 100%;
+      padding: 10px 16px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: none;
+      background-color: #fff;
+      box-shadow: 0 0 0 1px rgba(60, 66, 87, 0.16);
+      outline: none;
+      transition: box-shadow 0.3s;
+  
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(84, 105, 212, 0.5);
+      }
+    }
+  }
+  
+  .form-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    .forgot-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: #5469d4;
+      text-decoration: none;
+    }
+  }
+  
+  .form-check-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+    }
+  
+    label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+  
+  .btn-login {
+    width: 100%;
+    padding: 12px;
+    font-weight: 600;
+    background-color: #5469d4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px #5469d4, 0 2px 5px rgba(60, 66, 87, 0.08);
+    cursor: pointer;
+  }
+  
+  .ssolink {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+    font-weight: 600;
+    color: #5469d4;
+  }
+  
+  .register-link {
+    font-size: 14px;
+    margin-top: 16px;
+    color: #697386;
+  
+    a {
+      color: #5469d4;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  }
+  

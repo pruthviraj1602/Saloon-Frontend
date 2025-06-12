@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { StylishData } from '../components/stylish-main/stylish-main.component';
 import { Router } from '@angular/router';
+import {StorageService} from '../storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminserviceService {
 
-  constructor(private readonly http: HttpClient,private router: Router) { }
+  constructor(private readonly http: HttpClient,private router: Router,private storage:StorageService) { }
 
   login(user: any): Observable<any> {
     return this.http.post(`${BASE_URL}/admin/login`, user, {
@@ -35,7 +36,8 @@ export class AdminserviceService {
   }
 
   getAllStylists(): Observable<any[]> {
-    return this.http.get<any[]>(`${BASE_URL}/stylist/get-all-stylist`, {
+    let id=this.storage.getUserId();
+    return this.http.get<any[]>(`${BASE_URL}/stylist/get-stylist-by-admin?id=${id}`, {
       headers: {
         "Authorization": `Bearer ${localStorage.getItem('token')}`
       }
@@ -45,7 +47,7 @@ export class AdminserviceService {
 
 
   updateStylistStatus(id: number, updatedStatus: boolean) {
-    return this.http.patch<any>(
+    return this.http.put<any>(
       `${BASE_URL}/stylist/update-stylist`,
       {
         stylistId: id,
@@ -60,30 +62,15 @@ export class AdminserviceService {
   }
 
   updateStylistDetails(stylist: any) {
-    const params = new URLSearchParams({
-      stylistId: stylist.stylistId.toString(),
-      stylistName: stylist.stylistName,
-      email: stylist.email,
-      contact: stylist.contact,
-      location: stylist.location,
-      reference: stylist.reference,
-      expert_in: stylist.expert_in,
-      date: stylist.date,
-      bio: stylist.bio
-    });
-
-    return this.http.patch<any>(
-      `${BASE_URL}/stylist/update-stylist?${params.toString()}`,
-      null, // No JSON body
+    return this.http.put(
+      `${BASE_URL}/stylist/update-stylist?`,stylist,
       {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
-          // No Content-Type needed because no body
         }
       }
     );
   }
-
 
 
 
@@ -119,10 +106,12 @@ export class AdminserviceService {
 
 
   deleteStylist(id: number) {
-    const token = localStorage.getItem('token') || '';
-    const url = `${BASE_URL}/stylist/delete-stylists?id=${id}`;
-
-    return this.http.delete(url);
+    return this.http.delete(`${BASE_URL}/stylist/delete-stylist?stylistId=${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
   }
 
 
@@ -145,7 +134,8 @@ export class AdminserviceService {
   }
 
   public getAppointments():Observable<any>{
-    return this.http.get<any[]>(`${BASE_URL}/appointment/get-all-appointment`, {
+    let id=this.storage.getUserId();
+    return this.http.get<any[]>(`${BASE_URL}/appointment/get-appointment-by-admin?id=${id}`, {
       headers: {
         "Authorization": `Bearer ${localStorage.getItem('token')}`
       }
@@ -169,5 +159,42 @@ export class AdminserviceService {
     });
   }
 
+  public deleteAppointment(id:number):Observable<any>{
+    return this.http.delete(`${BASE_URL}/appointment/delete-appointment?id=${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
 
+  public countStylist():Observable<any>{
+   let id=this.storage.getUserId();
+    return this.http.get(`${BASE_URL}/stylist/count-of-stylist?id=${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
+
+  public countAppointment():Observable<any>{
+    let id=this.storage.getUserId();
+    return this.http.get(`${BASE_URL}/appointment/count-of-appointment?id=${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
+
+  public countCustomer():Observable<any>{
+    let id=this.storage.getUserId();
+    return this.http.get(`${BASE_URL}/appointment/count-of-customer?id=${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
 }

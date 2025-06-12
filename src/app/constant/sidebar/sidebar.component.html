@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-light-primary custom-sidebar-bg elevation-4">
   <!-- Brand Logo -->
-  <a href="index3.html" class="brand-link bg-primary elevation-2">
+  <a routerLink="/dashboard" class="brand-link bg-primary elevation-2">
     <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle" style="opacity: .8">
     <span class="brand-text font-weight-light">Saloon</span>
   </a>
@@ -26,44 +26,33 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item menu-open">
-          <a href="#" [routerLink]="['/dashboard']" class="nav-link active">
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-link" [routerLinkActiveOptions]="{ exact: true }">
             <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Dashboard
-            </p>
+            <p>Dashboard</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="" routerLink="/dashboard/stylish" class="nav-link">
-            <i class="nav-icon fa fa-user-tie" aria-hidden="true"></i>
-            <p>
-              Stylish
-            </p>
+          <a routerLink="/dashboard/stylish" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fa fa-user-tie"></i>
+            <p>Stylish</p>
           </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/dashboard/appointment-form" class="nav-link">
-            <i class="nav-icon fa fa-calendar-plus" aria-hidden="true"></i>
-            <p>
-              Book Appointment
-            </p>
+          <a routerLink="/dashboard/appointment-form" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fa fa-calendar-plus"></i>
+            <p>Book Appointment</p>
           </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/dashboard/reports" class="nav-link">
-            <i class="nav-icon fa fa-chart-bar" aria-hidden="true"></i>
-            <p>
-              Reports
-            </p>
+          <a routerLink="/dashboard/reports" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fa fa-chart-bar"></i>
+            <p>Reports</p>
           </a>
         </li>
         <li class="nav-item ">
-          <a routerLink="dashboard/leads" class="nav-link">
-            <i class="nav-icon fa fa-cog " aria-hidden="true"></i>
-
-            <p>
-              Settings
-            </p>
+          <a routerLink="/dashboard/leads" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fa fa-cog"></i>
+            <p>Settings</p>
           </a>
         </li>
 
@@ -130,9 +119,9 @@
 
       </ul>
     </nav>
-    
+
     <!-- /.sidebar-menu -->
   </div>
-  
+
   <!-- /.sidebar -->
 </aside>

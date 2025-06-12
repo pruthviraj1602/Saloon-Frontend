@@ -31,6 +31,7 @@ export class StylishMainComponent implements OnInit, AfterViewInit {
     'phoneNo',
     'reference',
     'location',
+    'expert',
     'actions'
   ];
   dataSource = new MatTableDataSource<StylishData>();
@@ -67,6 +68,7 @@ export class StylishMainComponent implements OnInit, AfterViewInit {
   fetchStylists(): void {
     this.adminService.getAllStylists().subscribe({
       next: (data) => {
+        console.log(data)
         const formatted: StylishData[] = data.map((item: any) => ({
           id: item.stylistId,
           stylishName1: item.stylistName,
@@ -74,6 +76,7 @@ export class StylishMainComponent implements OnInit, AfterViewInit {
           phoneNo: item.contact ?? 'N/A',
           reference: item.reference ?? 'N/A',
           location: item.location ?? 'N/A',
+          expert_in:item.expert_in?? 'N/A',
           active: item.active ?? false // Gets status from backend
         }));
         this.dataSource.data = formatted;
@@ -127,9 +130,10 @@ export class StylishMainComponent implements OnInit, AfterViewInit {
     if (confirm('Are you sure you want to delete this stylist?')) {
       this.adminService.deleteStylist(id).subscribe({
         next: (response) => {
-          console.log('Delete response:', response);
+          // console.log('Delete response:', response);
           this.snackBar.open('Stylist deleted successfully', 'Close', { duration: 3000 });
           this.fetchStylists();
+          this.ngOnInit();
         },
         error: (err) => {
           console.error('Failed to delete stylist:', err);

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ChartConfiguration, ChartType } from 'chart.js';
+import {AdminserviceService} from '../../services/adminservice.service';
+import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +9,42 @@ import { ChartConfiguration, ChartType } from 'chart.js';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
+
+  totalStylists: number = 0;
+  totalAppointments: number = 0;
+  totalCustomer: number = 0;
+
+  constructor(private service:AdminserviceService) {
+  }
+
+  ngOnInit() {
+   this.countOfStylist()
+    this.countOfAppointment()
+    this.countOfCustomer()
+  }
+
+  countOfStylist(){
+    this.service.countStylist().subscribe({
+      next: (data)=>{this.totalStylists=data },error:(err)=>{console.log(err)}})
+  }
+
+  countOfAppointment(){
+    this.service.countAppointment().subscribe({
+      next: (data)=>{this.totalAppointments=data},error:(err)=>{console.log(err) } })
+  }
+
+  countOfCustomer(){
+    this.service.countCustomer().subscribe({
+      next: (data)=>{
+        this.totalCustomer=data
+      },error:(err)=>{
+        console.log(err)
+      }
+    })
+  }
+
+
 
   // Line Chart (Financial Goal) - Warm Sunset Theme
   financialChartData: ChartConfiguration<'line'>['data'] = {
@@ -44,4 +81,6 @@ export class DashboardComponent {
       }
     }
   };
+
+
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminserviceService } from '../../services/adminservice.service';
 import {FormControl, FormGroup} from '@angular/forms';
-
+import {StorageService} from '../../storage/storage.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { Validators } from '@angular/forms';
 @Component({
   selector: 'app-appointment-form',
   standalone: false,
@@ -12,10 +14,9 @@ export class AppointmentFormComponent implements OnInit {
 
   // UI states
   isSubmitting = false;
-  successMessage = '';
-  errorMessage = '';
 
-  constructor(private adminService: AdminserviceService) {}
+
+  constructor(private adminService: AdminserviceService,private storage:StorageService,private snackBar: MatSnackBar) {}
 
 
 
@@ -24,15 +25,15 @@ export class AppointmentFormComponent implements OnInit {
   }
 
 
-  appointment: FormGroup = new FormGroup({
-    customerName: new FormControl(''),
-    serviceName: new FormControl(''),
-    customerContact: new FormControl(''),
-    time: new FormControl(''),
-    date: new FormControl(''),
-    stylistId: new FormControl(''),
-    payment: new FormControl(0),
-    paymentType: new FormControl('')
+  appointment = new FormGroup({
+    stylistId: new FormControl('', Validators.required),
+    customerName: new FormControl('', Validators.required),
+    serviceName: new FormControl('', Validators.required),
+    customerContact: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
+    time: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
+    payment: new FormControl('', [Validators.required, Validators.min(1)]),
+    paymentType: new FormControl('', Validators.required)
   });
 
 
@@ -41,8 +42,8 @@ export class AppointmentFormComponent implements OnInit {
   fetchStylistNames(): void {
     this.adminService.getAllStylists().subscribe({
       next: (data) => {
-        console.log(data)
-        this.stylist=data;
+        // Filter out only active stylists
+        this.stylist = data.filter((stylist: any) => stylist.active === true);
       },
       error: (err) => {
         console.error('Error fetching stylist names:', err);
@@ -51,12 +52,18 @@ export class AppointmentFormComponent implements OnInit {
   }
 
 
-  submitAppointment(): void {
-    if (this.isSubmitting || this.appointment.invalid) return;
 
-    this.isSubmitting = true;
-    this.successMessage = '';
-    this.errorMessage = '';
+
+
+  submitAppointment(): void {
+    if (this.appointment.invalid) {
+      this.snackBar.open('Please fill out all required fields correctly.', 'Close', { duration: 3000 });
+      return;
+    }
+    if (this.isSubmitting || this.appointment.invalid) return;
+    let id=this.storage.getUserId();
+    this.isSubmitting= true;
+
 
     const formData = this.appointment.value;
 
@@ -70,18 +77,24 @@ export class AppointmentFormComponent implements OnInit {
       paymentType: formData.paymentType,
       stylist: {
         stylistId: formData.stylistId
+      },
+      admin:{
+        id:id
       }
     };
 
     console.log(payload)
     this.adminService.bookAppointment(payload).subscribe({
       next: () => {
-        this.successMessage = 'Appointment booked successfully!';
+        this.snackBar.open('Appointment Scheduled', 'Close', {
+          duration: 3000
+        });
+
         this.isSubmitting = false;
         this.appointment.reset();
       },
       error: (err) => {
-        this.errorMessage = 'Failed to book appointment.';
+
         console.error(err);
         this.isSubmitting = false;
       }

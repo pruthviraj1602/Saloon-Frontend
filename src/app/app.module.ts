@@ -33,12 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { EditRecordComponent } from './components/reports/edit-record/edit-record.component';
 import { PrintReportComponent } from './components/reports/print-report/print-report.component';
 import { EditStylishComponent } from './components/stylish-main/edit-stylish/edit-stylish.component';
-
-
-
-
-
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -58,10 +53,6 @@ import { EditStylishComponent } from './components/stylish-main/edit-stylish/edi
     EditRecordComponent,
     PrintReportComponent,
     EditStylishComponent,
-
-
-
-
   ],
   imports: [
     BrowserModule,
@@ -73,8 +64,8 @@ import { EditStylishComponent } from './components/stylish-main/edit-stylish/edi
     HttpClientModule,
     NgChartsModule,
     MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, MatDatepickerModule,
-    MatNativeDateModule, MatSelectModule
-
+    MatNativeDateModule, MatSelectModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

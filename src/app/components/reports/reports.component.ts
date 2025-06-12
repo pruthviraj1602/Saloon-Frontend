@@ -20,6 +20,18 @@ export class ReportsComponent implements AfterViewInit,OnInit {
 
   ngOnInit() {
     this.getAppointment()
+    this.getAllStylist()
+  }
+
+  public getAllStylist(){
+    this.adminService.getAllStylists().subscribe({
+      next: (data)=>{
+        console.log(data)
+        this.stylists = data.map((s: any) => s.stylistName);
+      },error:(err)=>{
+        console.log(err);
+      }
+    })
   }
 
   appointments: any[] =[];
@@ -27,9 +39,9 @@ export class ReportsComponent implements AfterViewInit,OnInit {
   getAppointment(): void {
     this.adminService.getAppointments().subscribe({
       next: (data) => {
-        console.log(data)
+        // console.log(data)
         this.appointments = data;
-        this.dataSource.data = data; // 👈 Set the data source here
+        this.dataSource.data = data;
       },
       error: (err) => {
         console.error('Error fetching appointments:', err);
@@ -40,7 +52,7 @@ export class ReportsComponent implements AfterViewInit,OnInit {
 
   displayedColumns: string[] = ['id', 'customer', 'contact', 'date', 'stylist', 'service', 'time', 'Payment', 'PaymentType', 'actions'];
 
-  stylists: string[] = ['Sam Karan', 'Marvin McKinney', 'Esther Howard'];
+  stylists: string[] = [];
   selectedStylist: string = '';
   fromDate!: Date;
   toDate!: Date;
@@ -82,7 +94,7 @@ export class ReportsComponent implements AfterViewInit,OnInit {
   }
 
  editRecord(id: number) {
-  console.log('Editing report with ID:', id); // 👈 This logs the ID
+  console.log('Editing report with ID:', id);
   this.router.navigate([`/dashboard/reports/edit/${id}`]);
 }
 
@@ -90,6 +102,20 @@ printRecord(id: number) {
   this.router.navigate([`/dashboard/reports/print-reports/${id}`]);
 }
 
+  delete(id:number){
+    console.log(id)
+  this.adminService.deleteAppointment(id).subscribe({
+    next: (data)=>{
+      console.log(data)
+      if(data){
+        alert("appointment Deleted Successfully...!")
+      }
+
+    },error:(err)=>{
+      console.log("appointment not deleted...",err)
+    }
+  })
+  }
 
 
 }
